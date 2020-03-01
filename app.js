@@ -41,7 +41,7 @@ app.get('/hello',(req,res)=>{
 })
 
 // creating the paths
-
+//main path
 app.get('/',(req,res)=>{
     res.render('home')
 })
@@ -57,7 +57,14 @@ app.post('/login',(req,res)=>{
 app.get('/register',(req,res)=>{
     res.render('register')
 });
-
+app.post('/regester',(req,res)=>{
+  let username = req.body.username;
+  let password = req.body.password;
+  let s = req.session;
+  console.log(s);
+let sql = `INSERT INTO '${process.env.TABLE_NAME}'. 'userinfo'('userName','password','cookie','state_id')VALUES(${username},${password});`
+connection.query(sql,(err,result)=>{console.log(result)})
+})
 // app listening to port 
 app.listen(3000,()=>{console.log('working!')})
 
